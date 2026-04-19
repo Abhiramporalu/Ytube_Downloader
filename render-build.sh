@@ -9,6 +9,8 @@ echo "Building frontend..."
 cd frontend
 npm ci
 npm run build
+mkdir -p ../backend/dist
+cp -rv dist/* ../backend/dist/
 
 echo "Installing backend dependencies..."
 cd ../backend

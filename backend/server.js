@@ -22,8 +22,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve Static Assets from React Build
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// Serve Static Assets from React Build (Consolidated in backend/dist)
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Temporary download directory to hold muxed files before serving
 const tempDir = path.join(__dirname, 'temp_downloads');
@@ -158,7 +158,7 @@ app.get('/api/download', (req, res) => {
 
 // Serve frontend for all other routes (Express 5 compatible)
 app.get('*path', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 
