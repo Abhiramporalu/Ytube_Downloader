@@ -1,0 +1,9 @@
+{
+  "name": "ytube-downloader",
+  "version": "1.0.0",
+  "description": "YouTube downloader backend and frontend monorepo",
+  "scripts": {
+    "build": "./render-build.sh",
+    "start": "cd backend && node server.js"
+  }
+}
