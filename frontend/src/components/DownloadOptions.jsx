@@ -6,7 +6,7 @@ const DownloadOptions = ({ videoInfo, url }) => {
 
   const handleDownload = (height) => {
     // Generate the download link and prompt download in browser
-    window.location.href = `http://localhost:5005/api/download?url=${encodeURIComponent(url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&height=${height}`;
+    window.location.href = `/api/download?url=${encodeURIComponent(url)}&title=${encodeURIComponent(videoInfo.title || 'video')}&height=${height}`;
   };
 
   return (

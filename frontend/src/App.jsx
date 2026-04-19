@@ -19,7 +19,7 @@ function App() {
     setVideoInfo(null);
 
     try {
-      const response = await axios.get(`http://localhost:5005/api/info?url=${encodeURIComponent(url)}`);
+      const response = await axios.get(`/api/info?url=${encodeURIComponent(url)}`);
       setVideoInfo(response.data);
     } catch (err) {
       console.error(err);

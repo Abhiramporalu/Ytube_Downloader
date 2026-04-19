@@ -21,6 +21,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve Static Assets from React Build
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
 // Temporary download directory to hold muxed files before serving
 const tempDir = path.join(__dirname, 'temp_downloads');
 if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
@@ -152,7 +155,11 @@ app.get('/api/download', (req, res) => {
   });
 });
 
-const PORT = 5005;
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
+
+const PORT = process.env.PORT || 5005;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
