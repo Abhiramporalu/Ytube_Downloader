@@ -156,9 +156,11 @@ app.get('/api/download', (req, res) => {
   });
 });
 
-app.get('*', (req, res) => {
+// Serve frontend for all other routes (Express 5 compatible)
+app.get('*path', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
+
 
 const PORT = process.env.PORT || 5005;
 app.listen(PORT, () => {

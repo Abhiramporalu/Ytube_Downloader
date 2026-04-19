@@ -4,7 +4,8 @@
   "description": "YouTube downloader backend and frontend monorepo",
   "scripts": {
     "postinstall": "cd frontend && npm install && npm run build && cd ../backend && curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o yt-dlp && chmod a+rx yt-dlp",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
