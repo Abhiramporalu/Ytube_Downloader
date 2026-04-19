@@ -23,7 +23,14 @@ app.use(cors());
 app.use(express.json());
 
 // Serve Static Assets from React Build (Consolidated in backend/dist)
-app.use(express.static(path.join(__dirname, 'dist')));
+const distPath = path.join(__dirname, 'dist');
+if (!fs.existsSync(distPath)) {
+  console.error(`ERROR: Frontend dist folder missing at: ${distPath}`);
+  console.log('Current directory structure:', fs.readdirSync(__dirname));
+} else {
+  console.log('Frontend dist folder found. Serving static files.');
+}
+app.use(express.static(distPath));
 
 // Temporary download directory to hold muxed files before serving
 const tempDir = path.join(__dirname, 'temp_downloads');
