@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: ytube-downloader
-    env: node
-    buildCommand: ./render-build.sh
-    startCommand: cd backend && npm run dev
-    envVars:
-      - key: NODE_VERSION
-        value: 20.11.0
