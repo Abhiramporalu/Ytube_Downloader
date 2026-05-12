@@ -163,8 +163,8 @@ app.get('/api/download', (req, res) => {
   });
 });
 
-// Serve frontend for all other routes (Express 5 compatible)
-app.get('*path', (req, res) => {
+// Serve frontend for all other routes (catch-all route)
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
