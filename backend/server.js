@@ -59,7 +59,7 @@ app.get('/api/info', async (req, res) => {
         console.error('yt-dlp getInfo error:', error);
         console.error('yt-dlp stderr:', stderr);
         return res.status(500).json({ 
-          error: 'Failed to extract video details or age-restricted.',
+          error: 'YouTube blocked the request. Try again later or check the browser console for details.',
           details: stderr || error.message
         });
       }
