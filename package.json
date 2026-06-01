@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "YouTube downloader backend and frontend monorepo",
   "scripts": {
-    "postinstall": "npm install --prefix frontend && cd frontend && npx vite build && cd .. && mkdir -p backend/dist && cp -r frontend/dist/* backend/dist/ && npm install --prefix backend && cd backend && curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o yt-dlp && chmod a+rx yt-dlp",
+    "postinstall": "npm install --prefix frontend && cd frontend && npx vite build && cd .. && mkdir -p backend/dist && cp -r frontend/dist/* backend/dist/ && npm install --prefix backend && cd backend && (if [ \"$(uname)\" = \"Darwin\" ]; then curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos -o yt-dlp; else curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o yt-dlp; fi) && chmod a+rx yt-dlp",
     "build": "npm run build --prefix backend",
     "start": "node backend/server.js",
     "dev": "node --watch backend/server.js"
