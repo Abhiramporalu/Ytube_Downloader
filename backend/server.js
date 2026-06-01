@@ -54,10 +54,14 @@ app.get('/api/info', async (req, res) => {
     }
 
     // Fetch JSON info
-    exec(`"${ytdlPath}" -J --no-playlist --no-warnings "${url}"`, { maxBuffer: 15 * 1024 * 1024 }, (error, stdout, stderr) => {
+    exec(`"${ytdlPath}" -4 -J --no-playlist --no-warnings "${url}"`, { maxBuffer: 15 * 1024 * 1024 }, (error, stdout, stderr) => {
       if (error) {
         console.error('yt-dlp getInfo error:', error);
-        return res.status(500).json({ error: 'Failed to extract video details or age-restricted.' });
+        console.error('yt-dlp stderr:', stderr);
+        return res.status(500).json({ 
+          error: 'Failed to extract video details or age-restricted.',
+          details: stderr || error.message
+        });
       }
 
       try {
@@ -132,6 +136,7 @@ app.get('/api/download', (req, res) => {
 
   // Build yt-dlp arguments
   const args = [
+    '-4',
     '-f', formatFlag,
     '--merge-output-format', fileExt,
     '-o', outputPath,
