@@ -4,6 +4,16 @@ const cors = require('cors');
 const { exec, spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const mongoose = require('mongoose');
+
+// Connect to MongoDB Atlas
+if (process.env.MONGO_URI) {
+  mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('Successfully connected to MongoDB Atlas'))
+    .catch((err) => console.error('MongoDB connection error:', err));
+} else {
+  console.log('No MONGO_URI found in environment variables. Running without database.');
+}
 
 // Auto-fallback for Node 18 missing globals
 if (!global.File) {
@@ -164,7 +174,7 @@ app.get('/api/download', (req, res) => {
 });
 
 // Serve frontend for all other routes (catch-all route)
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
